@@ -1,0 +1,56 @@
+{
+  "additional_approver": "Information Governance",
+  "systems": {
+    "ESR": {
+      "owner": "ESR Systems Team",
+      "permission_levels": ["Self-service", "Manager Self-service", "HR Administrator"]
+    },
+    "Entra ID": {
+      "owner": "IT Identity Team",
+      "permission_levels": ["Standard User", "Shared Mailbox Access", "Privileged User"]
+    },
+    "CIS2 Smartcard": {
+      "owner": "Registration Authority",
+      "permission_levels": ["Admin & Clerical", "Registered Nurse", "Pharmacist", "Medical Practitioner"]
+    },
+    "EPR": {
+      "owner": "Clinical Systems Team",
+      "permission_levels": ["Read Only", "Clinical Read/Write", "Prescriber"]
+    },
+    "Pharmacy System": {
+      "owner": "Clinical Systems Team",
+      "permission_levels": ["Read Only", "Dispensing", "Pharmacy Administrator"]
+    }
+  },
+  "role_profiles": [
+    {
+      "job_role": "Staff Nurse",
+      "department": "Emergency Department",
+      "access": [
+        {"system": "Entra ID", "permission": "Standard User"},
+        {"system": "ESR", "permission": "Self-service"},
+        {"system": "CIS2 Smartcard", "permission": "Registered Nurse"},
+        {"system": "EPR", "permission": "Clinical Read/Write"}
+      ]
+    },
+    {
+      "job_role": "Pharmacist",
+      "department": "Pharmacy",
+      "access": [
+        {"system": "Entra ID", "permission": "Standard User"},
+        {"system": "ESR", "permission": "Self-service"},
+        {"system": "CIS2 Smartcard", "permission": "Pharmacist"},
+        {"system": "EPR", "permission": "Read Only"},
+        {"system": "Pharmacy System", "permission": "Dispensing"}
+      ]
+    },
+    {
+      "job_role": "HR Onboarding Officer",
+      "department": "Human Resources",
+      "access": [
+        {"system": "Entra ID", "permission": "Standard User"},
+        {"system": "ESR", "permission": "HR Administrator"}
+      ]
+    }
+  ]
+}
