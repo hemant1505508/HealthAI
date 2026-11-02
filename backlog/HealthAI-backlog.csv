@@ -1,0 +1,46 @@
+Story ID,Agent no.,Agent (link the story to this on the Agent board),Persona,Story (I want / I must),So that,Acceptance criteria,Developer (assign on Assignment tab),Workbench story ID,Status
+HAI-001,AGT-001,Patient Help Assistant,Patient,"I want to ask questions about the practice (opening hours, repeat prescriptions, registration)",I get accurate answers without phoning,"- Answers come only from the approved knowledge base
+- Every answer cites the source document and section
+- If no source is found, the agent says it does not know and gives the practice phone number
+- Answers are in plain English and at most 120 words",Hemant,,Ready
+HAI-002,AGT-001,Patient Help Assistant,Patient,"I want to book, move or cancel a GP appointment in the chat",I do not have to wait on the phone,"- Shows free slots from the appointment service (mock API for now)
+- Confirms date, time and clinician before booking
+- Patient can reschedule or cancel an existing booking
+- Each action is written to the audit log with a timestamp and booking id",Hemant,,Ready
+HAI-003,AGT-001,Patient Help Assistant,Practice manager,I must make the assistant refuse medical advice and send urgent cases to NHS 111 or 999,patients are never put at risk,"- Questions about symptoms, diagnosis or medication doses are refused politely
+- Red-flag words (chest pain, can't breathe, suicidal, etc.) trigger a 999 or NHS 111 message straight away
+- Refusals use a fixed, approved wording
+- Every refusal and escalation is logged",Hemant,,Ready
+HAI-004,AGT-001,Patient Help Assistant,Data protection officer,I must have personal data removed from chat logs,the practice meets UK GDPR,"- NHS number, name, date of birth, address, phone and e-mail are masked before anything is logged
+- Unit tests cover each data type with UK formats
+- Raw chat text is not stored beyond the session
+- Log retention follows the record retention schedule",Hemant,,Ready
+HAI-005,AGT-002,Clinical Note Summariser,GP,I want a structured summary of my consultation notes,I spend less time on admin,"- Output sections: Presenting complaint, History, Examination, Plan, Follow-up
+- Each summary line links back to the source note line it came from
+- Nothing appears in the summary that is not in the notes (faithfulness check)
+- Works on notes up to 3,000 words",Hemant,,Ready
+HAI-006,AGT-002,Clinical Note Summariser,GP,"I must review, edit and approve a summary before it is saved",the record is always clinically checked,"- Summary is shown as an editable draft
+- It can only be saved after the clinician clicks Approve
+- The approver's id and the time are recorded
+- A rejected draft is discarded and not stored",Hemant,,Ready
+HAI-007,AGT-002,Clinical Note Summariser,GP,I want the assistant to flag gaps in the notes,I can fill them in rather than have them guessed,"- Missing sections are marked Not recorded instead of being filled in
+- Ambiguous medication or dose text is highlighted for review
+- Flags are listed at the top of the draft",Hemant,,Ready
+HAI-008,AGT-002,Clinical Note Summariser,Practice manager,I must have every summary action audited,we can show who did what and when,"- Log entries for generated, edited, approved and rejected
+- Each entry records user id, time, model version and policy version
+- Log entries contain no clinical text
+- An audit report can be exported as CSV",Hemant,,Ready
+HAI-009,AGT-003,Referral Letter Drafter,GP,I want a referral letter drafted from the approved summary,referrals go out faster,"- Uses the practice referral template (header, reason, history, medication, request)
+- Fills fields only from the approved summary
+- Fields with no data are left as [To complete] for the clinician
+- Draft is ready in under 10 seconds",Hemant,,Ready
+HAI-010,AGT-003,Referral Letter Drafter,GP,I must edit and sign off the letter before it is sent,I stay responsible for its content,"- Letter cannot be exported or sent until signed off
+- Sign-off records clinician id and time
+- Edits after sign-off need a new sign-off",Hemant,,Ready
+HAI-011,AGT-003,Referral Letter Drafter,Patient,I want a version of my referral letter I can understand,I know what happens next,"- Patient copy is written at reading age 11 or below
+- Medical terms are explained in brackets
+- Says what happens next and who to contact
+- Clinician approves the patient copy separately",Hemant,,Ready
+HAI-012,AGT-003,Referral Letter Drafter,Patient with a disability,I want an accessible copy of my referral letter,I can read it with assistive technology,"- Export as accessible PDF and HTML meeting WCAG 2.2 AA
+- Large-print option (at least 16pt)
+- Passes an automated accessibility check in CI",Hemant,,Ready

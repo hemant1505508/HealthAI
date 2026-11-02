@@ -1,0 +1,33 @@
+Agent,Agent ID,Owner,Problem,Measures,In scope,Out of scope,Regions,Product classes
+Patient Help Assistant,AGT-001,Hemant,"Patients phone the GP practice for routine questions and appointments, which ties up reception staff and creates long phone queues.","- 60% of routine questions answered without a phone call
+- Every answer cites an approved source
+- 100% of red-flag symptoms sent to 999 or NHS 111
+- Hallucination rate under 2% on the evaluation set
+- No personal data in logs","- Practice FAQs (opening hours, repeat prescriptions, registration)
+- Booking, moving and cancelling appointments
+- Sending urgent cases to 999 or NHS 111
+- Masking personal data before logging","- Diagnosis or symptom advice
+- Medication or dose advice
+- Reading or changing medical records
+- Payments",UK,Conversational assistant
+Clinical Note Summariser,AGT-002,Hemant,"GPs spend a large part of each day writing up consultation notes, which cuts the time available for patients.","- Admin time per consultation down by 30%
+- 100% of summaries approved by a clinician before saving
+- Every summary line linked to its source note
+- No facts added that are not in the notes (faithfulness check)
+- Every action audited","- Structured summaries of consultation notes
+- Flagging missing or unclear information
+- Clinician review, edit and approval
+- Audit trail of every action","- Saving without clinician approval
+- Clinical decisions or treatment advice
+- Coding (SNOMED or ICD)
+- Writing directly to the clinical system",UK,Summarisation
+Referral Letter Drafter,AGT-003,Hemant,"Referral letters take GPs a long time to write and patients often do not understand what their referral means.","- Time to produce a referral letter down by 50%
+- 100% of letters signed off by a clinician before sending
+- Patient copy at reading age 11 or below
+- Exports meet WCAG 2.2 AA","- Drafting referral letters from the approved summary and practice template
+- Clinician review and sign-off
+- Plain-language patient copy
+- Accessible PDF and HTML export","- Sending letters without sign-off
+- Choosing the specialist or service
+- Booking hospital appointments
+- Using data not in the approved summary",UK,Document generation

@@ -1,0 +1,15 @@
+[33mcommit e89b8cdbe2cdc1e94a4afca7b29f3d6e6ad6a46f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mci/US-08-adlc-evaluate[m[33m, [m[1;31morigin/ci/US-08-adlc-evaluate[m[33m)[m
+Author: Hemant Gaikwad <hemant.gaikwad@mastek.com>
+Date:   Mon Nov 2 20:30:29 2026 +0530
+
+    Document Workbench reporting in the README
+    
+    Explains the commit hooks and how to turn on CI evidence for pull
+    requests (ADLC_CI_TOKEN secret and ADLC_SERVER variable).
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+    
+    ADLC-Task: US-08
+    ADLC-Story: US-08
+    ADLC-Agent: AGT-001
+    ADLC-Context: 2e3532f18f5c
