@@ -1,0 +1,36 @@
+# From .workbench/ci/github-actions.yml, plus the Python test run.
+# Set the repository variable ADLC_SERVER (the Workbench API address) and the secret ADLC_CI_TOKEN (a CI token from the
+# Workbench: Project knowledge, Developer machines). Until they are set the check still runs; it just does not report.
+name: ADLC evaluate
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  adlc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run the tests
+        run: |
+          pip install -e ".[dev]"
+          python -m pytest --cov=healthone --junitxml=test-results.xml
+      - name: Get the program (skipped when it is committed)
+        if: always()
+        run: test -f adlc.mjs || curl -fsSL -o adlc.mjs "${{ vars.ADLC_SERVER }}/api/developer/cli"
+      - name: Evaluate against the Workbench's rules
+        if: always()
+        env:
+          ADLC_SERVER: ${{ vars.ADLC_SERVER }}
+          ADLC_CI_TOKEN: ${{ secrets.ADLC_CI_TOKEN }}
+        # --enforce fails the check when a locked file was edited, a secret was added or tests failed. Missing task trailers only warn; add --enforce-trailers to fail on them too.
+        run: node adlc.mjs evaluate --base "origin/${{ github.base_ref }}" --tests test-results.xml --report --enforce
