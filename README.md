@@ -29,3 +29,11 @@ uvicorn healthone.api:app --reload      # http://127.0.0.1:8000/docs
 
 The RBAC catalogue in `healthone/data/rbac_catalogue.json` is sample data until the real catalogue is supplied.
 Storage is in memory for now.
+
+## Workbench reporting
+
+- **Commits:** run `node adlc.mjs hooks install` once, then `node adlc.mjs task start <story>` before you work.
+  Each commit gets the task trailers and is reported to the Workbench (id and counts only, never the message or code).
+- **Pull requests:** `.github/workflows/adlc.yml` runs the tests and `node adlc.mjs evaluate` on every pull request to
+  `main`. To send the result to the Workbench's CI evidence, add the repository secret `ADLC_CI_TOKEN` (a CI token from
+  the Workbench) and the variable `ADLC_SERVER` (`http://98.70.60.86`).
